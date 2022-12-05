@@ -31,7 +31,7 @@ function sweep!(lattice::Matrix{Int64},
     #     end
     # end
 
-    # Sweep but in random order
+    # Sweep in random order
     indices = Iterators.product(randperm(L_x), randperm(L_y)) |> collect
     for (x, y) in indices
         @inbounds neighbours = lattice[next[x], y] + lattice[x, next[y]] + lattice[prev[x], y] + lattice[x, prev[y]]
@@ -235,7 +235,7 @@ function main()
     temp_range = collect(range(TEMP_MIN, stop=TEMP_MAX, step=TEMP_STEP))
     temp_length = length(temp_range)
 
-    path = "./isingcore/" * t_start_str * " L=$LATTICE_SIZE MCS=$total_MCS T=$TEMP_MIN _$TEMP_STEP _$TEMP_MAX/"
+    path = "./isingcore_results/" * t_start_str * " L=$LATTICE_SIZE MCS=$total_MCS T=$TEMP_MIN _$TEMP_STEP _$TEMP_MAX/"
     mkpath(path * "/lattices")
     mkpath(path * "/magnetizations")
     mkpath(path * "/energies")
